@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2023 at 04:13 AM
+-- Generation Time: Dec 04, 2023 at 08:16 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -78,6 +78,7 @@ CREATE TABLE `mobil` (
   `harga` int(11) NOT NULL,
   `denda` int(11) NOT NULL,
   `ac` int(11) NOT NULL,
+  `supir` int(11) NOT NULL,
   `mp3_player` int(11) NOT NULL,
   `central_lock` int(11) NOT NULL,
   `gambar` varchar(255) NOT NULL
@@ -87,11 +88,12 @@ CREATE TABLE `mobil` (
 -- Dumping data for table `mobil`
 --
 
-INSERT INTO `mobil` (`id_mobil`, `kode_type`, `merk`, `no_plat`, `warna`, `tahun`, `status`, `harga`, `denda`, `ac`, `mp3_player`, `central_lock`, `gambar`) VALUES
-(10, 'SDN', 'Toyota Vios', 'B 1287 XYZ', 'Putih', '2016', '0', 750000, 200000, 1, 1, 0, 'Toyota-Vios-Indonesia-1-1024x576.jpg'),
-(11, 'SDN', 'Honda City', 'D 2188 KRS', 'Merah', '2018', '0', 550000, 165000, 1, 1, 0, 'honda-city-2020-e1619790302648.jpg'),
-(13, 'SDN', 'CRV', 'B 1234 CUH', 'Navy', '2020', '0', 500000, 100000, 1, 1, 1, 'honda-cr-v-2023-2_169.jpeg'),
-(14, 'MNV', 'Toyota Avanza', 'B 4226 BKR', 'Silver', '2018', '1', 450000, 120000, 1, 1, 1, 'avanza2.jpeg');
+INSERT INTO `mobil` (`id_mobil`, `kode_type`, `merk`, `no_plat`, `warna`, `tahun`, `status`, `harga`, `denda`, `ac`, `supir`, `mp3_player`, `central_lock`, `gambar`) VALUES
+(10, 'SDN', 'Toyota Vios', 'B 1287 XYZ', 'Putih', '2016', '1', 750000, 200000, 1, 1, 1, 1, 'Toyota-Vios-Indonesia-1-1024x576.jpg'),
+(11, 'SDN', 'Honda City', 'D 2188 KRS', 'Merah', '2018', '0', 550000, 165000, 1, 0, 1, 0, 'honda-city-2020-e1619790302648.jpg'),
+(13, 'SDN', 'CRV', 'B 1234 CUH', 'Navy', '2020', '1', 500000, 100000, 1, 0, 1, 1, 'honda-cr-v-2023-2_169.jpeg'),
+(14, 'MNV', 'Toyota Avanza', 'B 4226 BKR', 'Silver', '2018', '0', 450000, 120000, 1, 0, 1, 1, 'avanza2.jpeg'),
+(15, 'SUV', 'Daihatsu Terios', 'B 4232 RTX', 'Putih', '2021', '1', 700000, 125000, 1, 0, 1, 1, 'cec8db441f38e316e73d164d65eb50c0.jpg');
 
 -- --------------------------------------------------------
 
@@ -141,7 +143,9 @@ INSERT INTO `transaksi` (`id_rental`, `id_customer`, `id_mobil`, `tanggal_rental
 (6, 3, 11, '2023-12-03', '2023-12-08', '165000', '1155000', '550000', '2023-12-15', 'Belum Kembali', 'Selesai', 'bukti1_(2).pdf', 0),
 (7, 1, 12, '2023-12-04', '2023-12-07', '250000', '750000', '750000', '2023-12-10', 'Belum Kembali', 'Selesai', 'bukti1_(3).pdf', 1),
 (8, 1, 10, '2023-12-03', '2023-12-12', '200000', '0', '750000', '0000-00-00', 'Belum Kembali', 'Belum Selesai', 'bukti11.pdf', 0),
-(10, 3, 11, '2023-12-04', '2023-12-08', '165000', '330000', '550000', '2023-12-10', 'Belum Kembali', 'Belum Selesai', '', 0);
+(10, 3, 11, '2023-12-04', '2023-12-08', '165000', '330000', '550000', '2023-12-10', 'Belum Kembali', 'Belum Selesai', '', 0),
+(11, 3, 14, '2023-12-04', '2023-12-12', '120000', '0', '450000', '0000-00-00', 'Belum Kembali', 'Belum Selesai', '', 0),
+(12, 3, 13, '2023-12-05', '2023-12-07', '100000', '0', '500000', '0000-00-00', 'Belum Kembali', 'Belum Selesai', 'invoice.pdf', 0);
 
 -- --------------------------------------------------------
 
@@ -161,7 +165,10 @@ CREATE TABLE `type` (
 
 INSERT INTO `type` (`id_type`, `kode_type`, `nama_type`) VALUES
 (1, 'SDN', 'Sedan'),
-(3, 'MNV', 'Mini Van');
+(3, 'MNV', 'Mini Van'),
+(4, 'SUV', 'Sport Utility Vehicle'),
+(5, 'HTB', 'Hatchback'),
+(6, 'MPV', 'Multi Purpose Vehicle');
 
 --
 -- Indexes for dumped tables
@@ -223,7 +230,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `mobil`
 --
 ALTER TABLE `mobil`
-  MODIFY `id_mobil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_mobil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `rental`
@@ -235,13 +242,13 @@ ALTER TABLE `rental`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_rental` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_rental` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `type`
 --
 ALTER TABLE `type`
-  MODIFY `id_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
